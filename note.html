@@ -1,0 +1,75 @@
+# Implementation Plan - Invoice Management App
+
+This plan outlines the steps to build a full-stack (or persistent frontend) Invoice Management Application using React.
+
+## User Review Required
+
+> [!IMPORTANT]
+> **Data Persistence**: The brief mentions persisting state via LocalStorage, IndexedDB, or a backend. For this plan, we will start with **LocalStorage** for simplicity and immediate feedback, but the architecture will allow for an easy switch to a backend API later.
+
+> [!NOTE]
+> **Figma Design**: Since I cannot access external links, I will base the UI logic on your current progress in `Home.jsx` and standard modern invoice app patterns.
+
+## Proposed Architecture
+
+We will use a modular component-based architecture with React Context for global state management.
+
+### 1. State Management & Theme
+- **ThemeContext**: To handle Light/Dark mode toggling and persist preference in LocalStorage.
+- **InvoiceContext**: To handle the global list of invoices, CRUD operations, and filtering logic.
+
+### 2. Component Breakdown
+- **Layout**: Sidebar (fixed), Main Content area.
+- **Invoice List**: Header (Title, Filter, New Invoice button), List of Invoice Cards.
+- **Invoice Card**: ID, Due Date, Client Name, Amount, Status Badge.
+- **Invoice Form (Drawer/Modal)**: Multi-field form for Sender/Client details, Item list (dynamic), and Status (Draft/Pending).
+- **Invoice Detail**: Detailed view with Delete, Edit, and Mark as Paid actions.
+
+---
+
+## Proposed Phases
+
+### Phase 1: Foundation & Global State [NEW]
+- Set up `ThemeContext` for Light/Dark mode.
+- Set up `InvoiceContext` to hold the invoice data.
+- Create a `dummyData.json` file to populate the app initially.
+
+### Phase 2: Navigation & Layout [MODIFY]
+- Refine the `Sidebar` to be responsive (top on mobile, left on desktop).
+- Implement the Light/Dark mode toggle button in the sidebar.
+- Add routing using `react-router-dom` (Home, Invoice Details).
+
+### Phase 3: Invoice List & Filtering [MODIFY]
+- Create the `Filter` component with a dropdown for (Draft, Pending, Paid).
+- Implement the search/filter logic in `InvoiceContext`.
+- Build the `InvoiceCard` component (reusing your `InvoiceStatus` logic).
+
+### Phase 4: Invoice Creation & Validation [NEW]
+- Build the `InvoiceForm` component.
+- Implement validation for required fields (Client name, Email, Items).
+- Add the "Add Item" dynamic field logic.
+- Handle "Save as Draft" vs "Save & Send" (Pending).
+
+### Phase 5: Details View & Actions [NEW]
+- Create the `InvoiceDetails` page.
+- Implement "Mark as Paid" logic (only for Pending).
+- Implement "Delete" with a confirmation modal.
+- Implement "Edit" which reuses the `InvoiceForm`.
+
+### Phase 6: Persistence & Polishing [MODIFY]
+- Sync `InvoiceContext` with `LocalStorage`.
+- Add animations (e.g., using CSS transitions or Framer Motion if desired).
+- Final responsive check for all break points (Mobile, Tablet, Desktop).
+
+---
+
+## Verification Plan
+
+### Automated Tests
+- Since you are building this yourself, I recommend manual verification initially, but you can add unit tests for the validation logic later.
+
+### Manual Verification
+1.  **CRUD Check**: Create an invoice, edit it, delete it, and ensure it persists after reload.
+2.  **Status Flow**: Verify Draft -> Pending -> Paid transitions.
+3.  **Responsive Check**: Use Browser DevTools to test at 320px, 768px, and 1024px.
+4.  **Theme Check**: Toggle Dark/Light mode and ensure all elements (sidebar, cards, text) update correctly.

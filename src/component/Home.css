@@ -1,0 +1,395 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;700&display=swap');
+
+:root {
+  --color-primary: #7C5DFA;
+  --color-primary-light: #9277FF;
+  --color-dark-1: #1E2139;
+  --color-dark-2: #252945;
+  --color-light-1: #DFE3FA;
+  --color-light-2: #888EB0;
+  --color-light-3: #7E88C3;
+  --color-black: #0C0E16;
+  --color-red: #EC5757;
+  --color-red-light: #FF9797;
+  --color-bg-light: #F8F8FB;
+  --color-bg-dark: #141625;
+}
+
+.app-container {
+  --bg-body: var(--color-bg-light);
+  --bg-card: #FFFFFF;
+  --bg-sidebar: #373B53;
+  --text-main: #0C0E16;
+  --text-secondary: #888EB0;
+  --border-color: #DFE3FA;
+  min-height: 100vh;
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  transition: all 0.3s ease;
+  font-family: 'League Spartan', sans-serif;
+}
+
+.app-container.dark {
+  --bg-body: var(--color-bg-dark);
+  --bg-card: var(--color-dark-2);
+  --bg-sidebar: var(--color-dark-1);
+  --text-main: #FFFFFF;
+  --text-secondary: #DFE3FA;
+  --border-color: #252945;
+}
+
+.mobile-only {
+    display: inline;
+}
+
+@media (min-width: 768px) {
+    .mobile-only {
+        display: none;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* LAYOUT STRUCTURE */
+.container {
+    display: flex;
+    flex-direction: column; /* Default for Mobile */
+    min-height: 100vh;
+}
+
+@media (min-width: 1024px) {
+    .container {
+        flex-direction: row; /* Sidebar on left for Desktop */
+    }
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 100%;
+    height: 72px;
+    background-color: #373B53;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 101;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.app-container.dark .sidebar {
+    background-color: var(--color-dark-1);
+}
+
+@media (min-width: 1024px) {
+    .sidebar {
+        width: 103px;
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        flex-direction: column;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+}
+
+.logo {
+    width: 72px;
+    height: 72px;
+    background: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+@media (min-width: 1024px) {
+    .logo {
+        width: 103px;
+        height: 103px;
+    }
+}
+
+.logo img {
+    width: 28px;
+    z-index: 2;
+}
+
+.bottomnav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+@media (min-width: 1024px) {
+    .bottomnav {
+        flex-direction: column;
+        width: 100%;
+    }
+}
+
+.dark-light {
+    padding: 24px;
+    cursor: pointer;
+    border-right: 1px solid #494E6E;
+}
+
+@media (min-width: 1024px) {
+    .dark-light {
+        padding: 32px;
+        border-right: none;
+        border-bottom: 1px solid #494E6E;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.pfp {
+    padding: 24px;
+}
+
+.pfp img {
+    width: 32px;
+    border-radius: 50%;
+}
+
+/* CONTENT AREA */
+.content {
+    flex: 1;
+    padding: 32px 24px;
+    max-width: 730px;
+    width: 100%;
+    margin: 72px auto 0 auto; /* Centered with margin-top for mobile navbar */
+}
+
+@media (min-width: 1024px) {
+    .content {
+        margin: 0 auto; /* Center it globally */
+        padding: 72px 48px;
+        position: relative;
+        left: 51px; /* Offset half of sidebar width to look truly centered relative to rest of screen */
+    }
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+@media (min-width: 768px) {
+    .header {
+        margin-bottom: 64px;
+    }
+}
+
+.title h2 {
+    font-size: 20px;
+    letter-spacing: -1px;
+}
+
+@media (min-width: 768px) {
+    .title h2 {
+        font-size: 32px;
+    }
+}
+
+.title p {
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.headerleft {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+@media (min-width: 768px) {
+    .headerleft {
+        gap: 40px;
+    }
+}
+
+.newInvoice {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 6px 12px 6px 6px;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+@media (min-width: 768px) {
+    .newInvoice {
+        padding: 8px 16px 8px 8px;
+        gap: 16px;
+    }
+}
+
+.plus-bg {
+    background: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* CARDS LIST */
+.cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.card {
+    background-color: var(--bg-card);
+    padding: 24px;
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 10px -10px rgba(72, 84, 159, 0.1);
+}
+
+@media (min-width: 768px) {
+    .card {
+        grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 0.2fr;
+        padding: 16px 32px;
+        align-items: center;
+    }
+}
+
+.card:hover {
+    border-color: var(--color-primary);
+}
+
+.invoiceId {
+    font-weight: bold;
+    font-size: 12px;
+    grid-column: 1;
+}
+
+.invoiceName {
+    text-align: right;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+@media (min-width: 768px) {
+    .invoiceName {
+        text-align: left;
+        grid-column: auto;
+    }
+}
+
+.invoiceDate {
+    grid-row: 2;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+@media (min-width: 768px) {
+    .invoiceDate {
+        grid-row: auto;
+    }
+}
+
+.invoiceAmount {
+    grid-row: 3;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+@media (min-width: 768px) {
+    .invoiceAmount {
+        grid-row: auto;
+        text-align: right;
+        margin-right: 20px;
+    }
+}
+
+.status-badge-wrapper {
+    grid-row: 2 / span 2;
+    justify-self: end;
+}
+
+@media (min-width: 768px) {
+    .status-badge-wrapper {
+        grid-row: auto;
+        justify-self: auto;
+    }
+}
+
+.arrowright {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .arrowright {
+        display: block;
+    }
+}
+
+/* EMPTY STATE */
+.empty-state {
+    text-align: center;
+    margin-top: 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.empty-state img {
+    margin-bottom: 40px;
+    width: 200px;
+}
+
+@media (min-width: 768px) {
+    .empty-state img {
+        width: 240px;
+        margin-bottom: 64px;
+    }
+}
+
+/* FILTER DROPDOWN */
+.filter {
+    position: relative;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.filter-dropdown {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-card);
+    width: 150px;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    z-index: 10;
+}
